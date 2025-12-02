@@ -9,7 +9,7 @@ from tqdm import tqdm
 import json
 
 from config import Config
-from data.dataset import DroneDataset
+from data.dataset import DroneDataset, DroneDatasetWithAugmentation
 from models.yolo_lite import YOLOLite
 from models.loss import YOLOLoss
 from utils.visualization import Visualizer
@@ -62,7 +62,11 @@ class Trainer:
         self.visualizer = Visualizer(config)
     
     def create_dataloader(self, split):
-        dataset = DroneDataset(self.config, split=split)
+        if split == 'train':
+            dataset = DroneDatasetWithAugmentation(self.config, split=split, augment=True)
+        else:
+            dataset = DroneDataset(self.config, split=split)
+        
         loader = DataLoader(
             dataset,
             batch_size=self.config.BATCH_SIZE,

@@ -5,8 +5,8 @@ class Config:
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # Dữ liệu
-    SAMPLE_RATE = 100e6  # 100 MHz   # tần số lấy mẫu
-    FFT_SIZE = 256
+    SAMPLE_RATE = 24576000000  # 245.76 MHz   # tần số lấy mẫu
+    FFT_SIZE = 2048
     TIME_STEPS = 256
     INPUT_SIZE = (256, 256)
     
@@ -45,6 +45,9 @@ class Config:
     IOU_THRESHOLD = 0.5
     
     # Paths
-    DATA_DIR = './data/generated'
+    DATA_DIR = '/home/tth193/Documents/Drones_prj/data_388'  # YOLOv5 format: data/images/{train,val,test} and data/labels/{train,val,test}
     CHECKPOINT_DIR = './checkpoints'
     LOG_DIR = './logs'
+    
+    # Dataset format: 'yolov5' - supports (images/train,val,test) and (labels/train,val,test)
+    DATASET_FORMAT = 'yolov5'
